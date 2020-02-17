@@ -21,6 +21,6 @@ def s():
         db.session.add(message)
         db.session.commit()
 
-        return render_template('base.html')
-    return render_template('base.html')
+        return render_template('x.html')
+    return render_template('x.html')
    
