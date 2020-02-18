@@ -25,6 +25,16 @@
 
 
 <body>
+    <div style="margin-left: auto;margin-right: auto;width: 600px;height:auto" >
+        <ul>
+          <li><a href="/">主页</a></li>
+          <li><a href="#about">labview</a></li>
+          <li><a href="#about">python</a></li>
+          <li><a href="#about">新疆日记</a></li>
+          <li><a href="#about">登录</a></li>
+        
+        </ul>
+      </div>
 {% block content %}
 
 
@@ -37,6 +47,33 @@
 
 {% endblock %}
 </body>
+<script>
+    //显示注册弹窗的函数
+    function zc() {
+        var a=document.getElementById('zc');
+        a.style.display='block'
+    }
+    //关闭注册弹窗的函数
+    function zc0() {
+        var a=document.getElementById('zc');
+        a.style.display='none'
+    }
+  //显示登录弹窗的函数
+function xs() {
+    var a=document.getElementById('tc');
+    a.style.display='block'
+}
+//关闭登录弹窗的函数
+function xs0() {
+    var a=document.getElementById('tc');
+    a.style.display='none'
+}
+    
+    
+    
+    
+    
+</script>
 
 
 

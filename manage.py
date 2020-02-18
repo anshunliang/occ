@@ -3,7 +3,7 @@ from bluelog import create_app
 
 
 app = create_app()
-
+#login_manager = LoginManager(app)
 
 
 
