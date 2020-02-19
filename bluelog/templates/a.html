@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+
+{{ dropzone.load_css() }}
+{{ dropzone.style('border: 2px dashed #0087F7; margin: 10%') }}
 <!--风格填充-->
 {% block styles %}
 <style>
@@ -16,6 +19,7 @@ display:block;
 width: 100px;
 background-color:#dddddd;
 }
+
 </style>
 {% endblock styles %}
 
@@ -26,7 +30,7 @@ background-color:#dddddd;
 <div style="width:110px;height:600px;background:rgba(209, 55, 55, 0.5);float:left;padding:0px">
 
     <ul id="a">
-        <p><a id="b" href="#home" style="color:black;">添加文章</a></p>
+        <p><a id="b" href="{{url_for('admin.tj')}}" style="color:black;">添加笔记</a></p>
         <p><a id="b" href="#home" style="color:black;">Home</a></p>
         <p><a id="b" href="#home" style="color:black;">Home</a></p>
         <p><a id="b" href="#home" style="color:black;">Home</a></p>
@@ -78,6 +82,9 @@ background-color:#dddddd;
       </form>
   </div>
   </div>
+
+<!--{{ dropzone.create(action='admin.x') }}-->
+  
 
 
 

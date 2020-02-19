@@ -8,13 +8,17 @@ from bluelog.blueprints.admin import admin_bp
 from bluelog.extensions import db
 from bluelog.models import Admin
 from flask_login import LoginManager
+from flask_dropzone import Dropzone
+from flask_ckeditor import CKEditor
+
 import os
 ##
 ##
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-
+dropzone = Dropzone()
 login_manager = LoginManager() 
+ckeditor = CKEditor()
 def create_app(config_name=None):
     #选择配置名
     if config_name is None:
@@ -31,7 +35,8 @@ def create_app(config_name=None):
     db.init_app(app)  
              
     login_manager.init_app(app)
-    
+    dropzone.init_app(app)
+    ckeditor.init_app(app)
     
     register_shell_context(app)
 

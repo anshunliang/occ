@@ -68,3 +68,29 @@ def logout():
     flash('Goodbye.')
     print('退出登录')
     return redirect(url_for('admin.a'))  # 重定向回首页
+
+
+
+#添加笔记
+@admin_bp.route('/tj', methods=['GET', 'POST'])
+def tj():
+    if request.method == 'POST':  # 如果请求类型为POST，说明是文件上传请求
+        
+        return render_template('a.html')
+    
+    return render_template('tj.html')
+
+
+#接收图片
+@admin_bp.route('/x', methods=['GET', 'POST'])
+def x():
+    if request.method == 'POST':  # 如果请求类型为POST，说明是文件上传请求
+        f = request.files.get('file')  # 获取文件对象
+        print(f.filename)
+        f.save(os.path.join('F:\\LCC\\tupian', f.filename))  # 保存文件
+        return render_template('a.html')
+    
+    return render_template('a.html')
+
+
+

@@ -8,17 +8,20 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="//libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
-
+    <script src="//cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    {{ dropzone.load_css() }}
+    {{ dropzone.load_js() }}
+    {{ dropzone.style('border: 2px dashed #0087F7; margin: 10%') }}
 {% endblock head %}
 
 
 
 {% block styles %}
-    <style>
-        
-    </style>
-{% endblock styles %}
 
+{% endblock styles %}
+<style>
+        
+</style>
 
 </head>
 
@@ -37,7 +40,7 @@
           {% endif %}
           {% if current_user.is_authenticated %}  <!--验证是否已登录-->
           <li><a href="{{url_for('admin.logout')}}"> 注销登录</a></li>
-          
+        
           {% endif %}
         </ul>
       </div>
