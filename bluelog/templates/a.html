@@ -3,13 +3,44 @@
 <!--风格填充-->
 {% block styles %}
 <style>
+#a
+{
+list-style-type:none;
+margin:0;
+padding:0;
 
+}
+#b
+{
+display:block;
+width: 100px;
+background-color:#dddddd;
+}
 </style>
 {% endblock styles %}
 
 
 <!--内容填充-->
 {% block content %}
+{% if current_user.is_authenticated %}  <!--验证是否已登录-->
+<div style="width:110px;height:600px;background:rgba(209, 55, 55, 0.5);float:left;padding:0px">
+
+    <ul id="a">
+        <p><a id="b" href="#home" style="color:black;">添加文章</a></p>
+        <p><a id="b" href="#home" style="color:black;">Home</a></p>
+        <p><a id="b" href="#home" style="color:black;">Home</a></p>
+        <p><a id="b" href="#home" style="color:black;">Home</a></p>
+        
+        
+    </ul>
+
+
+</div>
+{% endif %}
+
+
+
+
 
 <div style="width: 900px;height: 600px;background-color:blanchedalmond;top:3cm;margin: 0 auto;">
 
