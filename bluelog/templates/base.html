@@ -8,7 +8,9 @@
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="//libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    
+    <script src="{{ url_for('static', filename='ckeditor/ckeditor.js') }}"></script>
+
     {{ dropzone.load_css() }}
     {{ dropzone.load_js() }}
     {{ dropzone.style('border: 2px dashed #0087F7; margin: 10%') }}

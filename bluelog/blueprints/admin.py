@@ -7,7 +7,7 @@ from flask_login import LoginManager,login_user,login_required, logout_user,curr
 from bluelog.models import Admin
 from bluelog.extensions import db
 from bluelog.models import Admin
-
+from bluelog.forms import PostForm   ###导入同级目录中的表单定义文件
 
 
 admin_bp = Blueprint('admin', __name__)  #定义蓝本
@@ -74,11 +74,12 @@ def logout():
 #添加笔记
 @admin_bp.route('/tj', methods=['GET', 'POST'])
 def tj():
+    wz=PostForm()
     if request.method == 'POST':  # 如果请求类型为POST，说明是文件上传请求
-        
+        body = request.form['body']
+        print(body)
         return render_template('a.html')
-    
-    return render_template('tj.html')
+    return render_template('tj.html',wz=wz)
 
 
 #接收图片
@@ -91,6 +92,13 @@ def x():
         return render_template('a.html')
     
     return render_template('a.html')
+
+#测试页面
+@admin_bp.route('/xx', methods=['GET', 'POST'])
+def xx():
+    
+    
+    return render_template('test.html')
 
 
 
