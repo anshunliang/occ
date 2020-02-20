@@ -13,7 +13,8 @@
 
     {{ dropzone.load_css() }}
     {{ dropzone.load_js() }}
-    {{ dropzone.style('border: 2px dashed #0087F7; margin: 10%') }}
+    {{ dropzone.style('border: 2px dashed #0087F7; margin: 0%') }}
+
 {% endblock head %}
 
 
@@ -21,9 +22,7 @@
 {% block styles %}
 
 {% endblock styles %}
-<style>
-        
-</style>
+
 
 </head>
 
@@ -31,7 +30,9 @@
 
 
 <body>
-    <div style="margin: 0 auto;width: 640px;;height:60px;background:rgba(209, 55, 55, 0.5)" >
+
+<!--导航栏-->
+<div style="margin: 0 auto;width: 640px;;height:60px;background:rgba(209, 55, 55, 0.5)" >
         <ul>
           <li><a href="/">主页</a></li>
           <li><a href="#about">labview</a></li>
@@ -42,11 +43,31 @@
           {% endif %}
           {% if current_user.is_authenticated %}  <!--验证是否已登录-->
           <li><a href="{{url_for('admin.logout')}}"> 注销登录</a></li>
-        
           {% endif %}
         </ul>
-      </div>
+</div>
 
+
+<!--根据是否登录来渲染侧边栏-->
+{% if current_user.is_authenticated %}  <!--验证是否已登录-->
+<div style="width:110px;height:600px;background:rgba(209, 55, 55, 0.5);float:left;padding:0px">
+    
+        <ul id="a">
+            <p><a id="b" href="{{url_for('admin.tj')}}" style="color:black;">添加笔记</a></p>
+            <p><a id="b" href="#home" style="color:black;">Home</a></p>
+            <p><a id="b" href="#home" style="color:black;">Home</a></p>
+            <p><a id="b" href="#home" style="color:black;">个人资料</a></p>   
+        </ul>
+    
+    
+</div>
+{% endif %}
+
+
+
+<div style="width: 900px;height: 600px;background-color:blanchedalmond;top:3cm;margin: 0 auto;">
+
+<!--子文件在下面的block填充内容-->
 {% block content %}
 
 
@@ -55,16 +76,34 @@
 
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+</div>
+
 </body>
+
+
+
+
+
+<!--所有js函数全部写在这里面-->
 <script>
-    //显示注册弹窗的函数
+//显示注册弹窗的函数
     function zc() {
         var a=document.getElementById('zc');
         a.style.display='block';
         var b=document.getElementById('tc');
         b.style.display='none'
     }
-    //关闭注册弹窗的函数
+//关闭注册弹窗的函数
     function zc0() {
         var a=document.getElementById('zc');
         a.style.display='none'
@@ -79,11 +118,6 @@ function xs0() {
     var a=document.getElementById('tc');
     a.style.display='none'
 }
-    
-    
-    
-    
-    
 </script>
 
 

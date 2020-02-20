@@ -29,25 +29,13 @@ background-color:#dddddd;
 <!--内容填充-->
 {% block content %}
 
-{% if current_user.is_authenticated %}  <!--验证是否已登录-->
-<div style="width:110px;height:600px;background:rgba(209, 55, 55, 0.5);float:left;padding:0px">
-
-    <ul id="a">
-        <p><a id="b" href="{{url_for('admin.tj')}}" style="color:black;">添加笔记</a></p>
-        <p><a id="b" href="#home" style="color:black;">Home</a></p>
-        <p><a id="b" href="#home" style="color:black;">Home</a></p>
-        <p><a id="b" href="#home" style="color:black;">Home</a></p>   
-    </ul>
-
-
-</div>
-{% endif %}
 
 
 
 
 
-<div style="width: 900px;height: 600px;background-color:blanchedalmond;top:3cm;margin: 0 auto;">
+
+
 
 
 
@@ -64,17 +52,11 @@ background-color:#dddddd;
 
 <!--创建文章-->
 <div  style="width: 700PX;height:300px;margin: 0 auto;background-color: aquamarine;"> <!--让div居中显示-->
-    
     <form method="post" action="{{ url_for('admin.tj') }}">
     {{wz.title}}
     {{wz.submit}}
     {{wz.body}}
     </form>
-
-</div>
-
-
-
 </div>
 
  
