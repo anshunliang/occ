@@ -42,19 +42,19 @@ background-color:#dddddd;
 
 {{ dropzone.create(action='admin.x') }}
 
-<!--
-<form method="post" action="{{url_for('admin.tj')}}">
-    {{ ckeditor.create() }}
+
+<form method="post" action="{{url_for('admin.cjfl')}}">
+    添加类名<input type="text" name="name" required><br><br>
     <input type="submit" >
 </form>
--->
+
 
 
 <!--创建文章-->
 <div  style="width: 700PX;height:300px;margin: 0 auto;background-color: aquamarine;"> <!--让div居中显示-->
     <form method="post" action="{{ url_for('admin.tj') }}">
-    {{wz.title}}
-    {{wz.submit}}
+    文章标题{{wz.title}}
+    提交{{wz.submit}}
     {{wz.body}}
     </form>
 </div>

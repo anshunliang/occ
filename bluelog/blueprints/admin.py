@@ -6,7 +6,7 @@ from flask import render_template, flash, redirect, url_for, request, current_ap
 from flask_login import LoginManager,login_user,login_required, logout_user,current_user
 from bluelog.models import Admin
 from bluelog.extensions import db
-from bluelog.models import Admin
+from bluelog.models import Admin,Category,Post
 from bluelog.forms import PostForm   ###导入同级目录中的表单定义文件
 
 
@@ -71,7 +71,22 @@ def logout():
 
 
 
-#添加笔记
+#创建分类
+@admin_bp.route('/cjfl', methods=['GET', 'POST'])
+def cjfl():
+    if request.method=='POST':
+        name=request.form['name']
+        message = Category(name=name)
+        db.session.add(message)
+        print("创建分类成功")
+        db.session.commit()
+        return redirect(url_for('admin.a'))
+    return redirect(url_for('admin.a'))
+
+
+
+
+#添加文章
 @admin_bp.route('/tj', methods=['GET', 'POST'])
 def tj():
     wz=PostForm()
