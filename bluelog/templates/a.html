@@ -78,6 +78,35 @@ background-color:#dddddd;
 <!--{{ dropzone.create(action='admin.x') }}-->
   
 
+ <!--文章展示--> 
+ <div style="margin:0 auto; width:600px; height:auto;padding: 30px" > <!--让div居中显示-->
+    
+      {% for i in m %} 
+      <div>
+      <h3>{{i.title}}  <small>类别：{{i.category.name}}</small></h3><br> 
+      <p>{{i.body|striptags|truncate}}<small><a style="color:greenyellow" >阅读更多</a></small></p>
+      <!--渲染删除按钮-->
+
+  
+      <hr/>  <!--生成一条分界线-->
+      </div>
+      {% endfor %}   
+      
+      
+     
+
+</div>
+
+
+ <!--渲染分页导航部件-->
+
+<div style="width:200px; height:60px; position: fixed; top:99%; left:50%; margin-top:-100px; margin-left:-100px; background-color:grey; padding-left: 10px;padding-right: 10px;padding-bottom: 0px;padding-top: 0px;"  >
+    <a style="float:left;margin-top: 0;margin-bottom: 5px"  href="{{url_for(request.endpoint,page=pagination.prev_num)}}">上一页</a>
+    <a style="float:left">当前第{{page}}页</a>
+    <a style="float:left;margin-top: 0;margin-bottom: 5px"   href="{{url_for('admin.a',page=pagination.next_num)}}">下一页</a>
+</div>
+
+
 
 
 

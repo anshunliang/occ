@@ -13,10 +13,12 @@ from bluelog.forms import PostForm   ###导入同级目录中的表单定义文�
 admin_bp = Blueprint('admin', __name__)  #定义蓝本
 
 #主页函数
-#@admin_bp.route('/',defaults={'page':1},methods=['post','get'])
-@admin_bp.route('/', methods=['GET', 'POST'])
-def a():
-    
+@admin_bp.route('/',defaults={'page':1},methods=['post','get'])
+@admin_bp.route('/page/<int:page>', methods=['GET', 'POST'])
+def a(page):
+    per_page=3
+    pagination= Post.query.order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
+    m=pagination.items
     if request.method=='POST':
         a=request.form['username']
         b=request.form['password']
@@ -27,7 +29,7 @@ def a():
 
 
         return render_template('a.html')
-    return render_template('a.html')
+    return render_template('a.html',m=m,page=page,pagination=pagination)
 
 #注册函数  
 @admin_bp.route('/zhuce', methods=['GET', 'POST'])
@@ -100,7 +102,8 @@ def tj():
         db.session.add(n)
         db.session.commit()
         print('交文章成功')
-        return render_template('a.html')
+        #return render_template('a.html')
+        return redirect(url_for('admin.a'))  #提交文章后，重定向到前台
     return render_template('tj.html',wz=wz)
 
 
