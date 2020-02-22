@@ -83,8 +83,8 @@ background-color:#dddddd;
     
       {% for i in m %} 
       <div>
-      <h3>{{i.title}}  <small>类别：{{i.category.name}}</small></h3><br> 
-      <p>{{i.body|striptags|truncate}}<small><a style="color:greenyellow" >阅读更多</a></small></p>
+      <h3>{{i.title}}  <small>类别：{{i.category.name}}</small></h3>
+      <p >{{i.body|striptags|truncate}}<small><a style="color:greenyellow" >阅读更多</a></small></p>
       <!--渲染删除按钮-->
 
   

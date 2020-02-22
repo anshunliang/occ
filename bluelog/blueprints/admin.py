@@ -32,7 +32,7 @@ def a(page):
     return render_template('a.html',m=m,page=page,pagination=pagination)
 
 
-#
+#分类展示函数
 @admin_bp.route('/d')
 def d():
         page=request.args.get('page',1,type=int)
@@ -41,7 +41,23 @@ def d():
         m=pagination.items
         return render_template('a.html',m=m,page=page,pagination=pagination)
 
+#分类展示函数
+@admin_bp.route('/e')
+def e():
+        page=request.args.get('page',1,type=int)
+        per_page=3
+        pagination=Post.query.filter_by(category_id=Category.query.filter_by(name='cc').first().id).order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
+        m=pagination.items
+        return render_template('a.html',m=m,page=page,pagination=pagination)
 
+#分类展示函数
+@admin_bp.route('/f')
+def f():
+        page=request.args.get('page',1,type=int)
+        per_page=3
+        pagination=Post.query.filter_by(category_id=Category.query.filter_by(name='anhsun').first().id).order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
+        m=pagination.items
+        return render_template('a.html',m=m,page=page,pagination=pagination)
 
 #注册函数  
 @admin_bp.route('/zhuce', methods=['GET', 'POST'])
