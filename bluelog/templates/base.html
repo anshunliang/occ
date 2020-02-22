@@ -35,9 +35,9 @@
 <div style="margin: 0 auto;width: 640px;;height:60px;background:rgba(209, 55, 55, 0.5)" >
         <ul>
           <li><a href="/">主页</a></li>
-          <li><a href="#about">labview</a></li>
-          <li><a href="#about">python</a></li>
-          <li><a href="#about">新疆日记</a></li>
+          <li><a href="{{url_for('admin.d')}}">anhsunpp</a></li>
+          <li><a href="#about">cc</a></li>
+          <li><a href="#about">anhsun</a></li>
           {% if not current_user.is_authenticated %}  <!--验证是否已登录-->
           <li><a href="#about" id='xs' onclick="xs();">登录</a></li>
           {% endif %}
