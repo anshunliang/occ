@@ -13,6 +13,7 @@ from bluelog.forms import PostForm   ###导入同级目录中的表单定义文�
 admin_bp = Blueprint('admin', __name__)  #定义蓝本
 
 #主页函数
+#@admin_bp.route('/',defaults={'page':1},methods=['post','get'])
 @admin_bp.route('/', methods=['GET', 'POST'])
 def a():
     
@@ -91,8 +92,14 @@ def cjfl():
 def tj():
     wz=PostForm()
     if request.method == 'POST':  # 如果请求类型为POST，说明是文件上传请求
+        title = request.form['title']
+        category = Category.query.get(request.form['category'])
         body = request.form['body']
         print(body)
+        n=Post(title=title,body=body,category=category)
+        db.session.add(n)
+        db.session.commit()
+        print('交文章成功')
         return render_template('a.html')
     return render_template('tj.html',wz=wz)
 
