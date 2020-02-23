@@ -153,5 +153,10 @@ def xx():
     
     return render_template('test.html')
 
-
+#文章视图
+@admin_bp.route('/post/<int:post_id>',methods=['POST','get'])
+def show_post(post_id):
+    post=Post.query.get_or_404(post_id)
+    
+    return render_template('show.html',post=post)
 

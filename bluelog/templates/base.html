@@ -32,7 +32,9 @@
 <body>
 
 <!--导航栏-->
-<div style="margin: 0 auto;width: 640px;;height:60px;background:rgba(209, 55, 55, 0.5)" >
+<!--<div style="margin: 0 auto;width: 640px;;height:60px;background:rgba(209, 55, 55, 0.5);" >-->
+<div style="position: fixed; top:3%; left:30%;background:green;min-width: 650px;margin-bottom: 0;" >
+    
         <ul>
           <li><a href="/">主页</a></li>
           <li><a href="{{url_for('admin.d')}}">anhsunpp</a></li>
@@ -48,9 +50,11 @@
 </div>
 
 
+
+
 <!--根据是否登录来渲染侧边栏-->
 {% if current_user.is_authenticated %}  <!--验证是否已登录-->
-<div style="width:110px;height:600px;background:rgba(209, 55, 55, 0.5);float:left;padding:0px">
+<div style="width:110px;float:left;padding:0px">
     
         <ul id="a">
             <p><a id="b" href="{{url_for('admin.tj')}}" style="color:black;">添加笔记</a></p>
@@ -65,7 +69,7 @@
 
 
 
-<div style="width: 900px;height: 600px;background-color:blanchedalmond;top:3cm;margin: 0 auto;">
+<div style="position: fixed; top:8%; left:20%;height: 90%;background:green;min-width: 650px;">
 
 <!--子文件在下面的block填充内容-->
 {% block content %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+
+
+
+<!--风格填充-->
+{% block styles %}
+<style>
+#a
+{
+list-style-type:none;
+margin:0;
+padding:0;
+
+}
+#b
+{
+display:block;
+width: 100px;
+background-color:#dddddd;
+}
+
+</style>
+{% endblock styles %}
+
+
+
+<!--内容填充-->
+<!--内容填充-->
+{% block content %}
+
+
+
+
+
+
+
+
+
+<div style="width: 900px;background:green;margin: 0 auto;">
+
+    <p style="float:left">{{post.body|striptags}}</p>
+
+
+</div>
+
+
+     
+
+
+{% endblock %}
+
