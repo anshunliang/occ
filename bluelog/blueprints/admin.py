@@ -7,15 +7,20 @@ from flask_login import LoginManager,login_user,login_required, logout_user,curr
 from bluelog.models import Admin
 from bluelog.extensions import db
 from bluelog.models import Admin,Category,Post
-from bluelog.forms import PostForm   ###导入同级目录中的表单定义文件
+from bluelog.forms import PostForm,LoginForm   ###导入同级目录中的表单定义文件
+from flask_ckeditor import CKEditor, CKEditorField, upload_fail, upload_success
+from flask import send_from_directory
+
 
 
 admin_bp = Blueprint('admin', __name__)  #定义蓝本
-
+ckeditor = CKEditor()
 #主页函数
+
 @admin_bp.route('/',defaults={'page':1},methods=['post','get'])
 @admin_bp.route('/page/<int:page>', methods=['GET', 'POST'])
 def a(page):
+    lg=LoginForm() 
     per_page=3
     pagination= Post.query.order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
     m=pagination.items
@@ -29,7 +34,7 @@ def a(page):
 
 
         return render_template('a.html')
-    return render_template('a.html',m=m,page=page,pagination=pagination)
+    return render_template('a.html',m=m,page=page,pagination=pagination,lg=lg)
 
 
 #分类展示函数
@@ -78,17 +83,18 @@ def zhuce():
 #登录函数
 @admin_bp.route('/login',methods=['get','post'])
 def login():
-        if request.method=='POST':
-                username=request.form['username']
-                password=request.form['password']
-                if not Admin.query.filter_by(username=username).first():
-                        return redirect(url_for('admin.a',b='用户名不存在'))
-                m=Admin.query.filter_by(username=username).first()
-                n=m.password_hash
-                if password==n:
-                    print("登录成功")
-                    login_user(m,remember = True)
-                    return redirect(url_for('admin.a'))
+    form=LoginForm()
+    if request.method=='POST' and form.validate_on_submit():
+        username=request.form['name']
+        password=request.form['password']
+        if not Admin.query.filter_by(username=username).first():
+            return redirect(url_for('admin.a',b='用户名不存在'))
+        m=Admin.query.filter_by(username=username).first()
+        n=m.password_hash
+        if password==n:
+            print("登录成功")
+            login_user(m,remember = True)
+            return redirect(url_for('admin.a'))
         return redirect(url_for('admin.a',s='密码错误'))
 
 #登出函数
@@ -121,6 +127,7 @@ def cjfl():
 @admin_bp.route('/tj', methods=['GET', 'POST'])
 def tj():
     wz=PostForm()
+    '''
     if request.method == 'POST':  # 如果请求类型为POST，说明是文件上传请求
         title = request.form['title']
         category = Category.query.get(request.form['category'])
@@ -130,8 +137,11 @@ def tj():
         db.session.add(n)
         db.session.commit()
         print('交文章成功')
-        #return render_template('a.html')
-        return redirect(url_for('admin.a'))  #提交文章后，重定向到前台
+        return render_template('a.html')
+        
+        # return redirect(url_for('admin.upload'))  #提交文章后，重定向到前台
+        #return render_template('tj.html',wz=wz)
+    '''
     return render_template('tj.html',wz=wz)
 
 
@@ -150,6 +160,9 @@ def x():
 @admin_bp.route('/xx', methods=['GET', 'POST'])
 def xx():
     
+    if request.method == 'POST':
+        data = request.form.get('ckeditor')
+        print(data)
     
     return render_template('test.html')
 
@@ -160,3 +173,24 @@ def show_post(post_id):
     
     return render_template('show.html',post=post)
 
+
+
+
+
+
+@admin_bp.route('/files/<filename>')
+def uploaded_files(filename):
+    path = 'F://LCC//tupian'
+    return send_from_directory(path, filename)
+
+
+@admin_bp.route('/upload', methods=['POST'])
+def upload():
+    f = request.files.get('upload')
+    extension = f.filename.split('.')[1].lower()
+    print(f.filename)
+    if extension not in ['jpg', 'gif', 'png', 'jpeg']:
+        return upload_fail(message='Image only!')
+    f.save(os.path.join('F:\\LCC\\tupian', f.filename))
+    url=url_for('admin.uploaded_files', filename=f.filename)
+    return upload_success(url=url)

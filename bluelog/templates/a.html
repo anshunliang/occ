@@ -48,9 +48,12 @@ background-color:#dddddd;
   <button type="button" style='float:right'; onclick="zc0();">关闭</button>
       <div style="margin:0 auto;width:300px;margin-top: 10%">
           <form method="post" action="{{url_for('admin.zhuce')}}">
+              
               <h3>注册用户</h3>
+              {{ lg.csrf_token }}
               用户名：<input type="text" name="username" ><br>
               密码哦：<input type="text" name="password_hash" ><br>
+              {{csrf_token}}
               
               <input class="btn" type="submit"value="注册"  >
           </form>
@@ -64,9 +67,11 @@ background-color:#dddddd;
   <div style="padding-top: 30px">
     
       <form method="post" action="{{url_for('admin.login')}}">
-          用户<input type="text" name="username" placeholder="请输入用户名" ><br>
-          密码<input type="password" name="password" placeholder="请输入密码" ><br>
-          <!-- 密码输入框的 type 属性使用 password，会将输入值显示为圆点 -->
+        {{ lg.csrf_token }}
+        {{ lg.name }}<br>
+        {{ lg.password }}
+
+
           
           
           <a id='xs' onclick="zc();"> 注册</a>
