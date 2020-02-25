@@ -193,7 +193,7 @@ def show_post(post_id):
 
 @admin_bp.route('/files/<filename>')
 def uploaded_files(filename):
-    path = 'F://LCC//tupian'
+    path = 'F:\\LCC\\bluelog\\templates\\files'
     return send_from_directory(path, filename)
 
 
@@ -204,7 +204,7 @@ def upload():
     print(f.filename)
     if extension not in ['jpg', 'gif', 'png', 'jpeg']:
         return upload_fail(message='Image only!')
-    f.save(os.path.join('F:\\LCC\\tupian', f.filename))
+    f.save(os.path.join('F:\\LCC\\bluelog\\templates\\files', f.filename))
     url=url_for('admin.uploaded_files', filename=f.filename)
 
     
