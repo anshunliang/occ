@@ -46,7 +46,7 @@ background-color:#dddddd;
 <!--创建文章-->
 
 <div  style="width: 900PX;height:300px;margin: 0 auto;background-color: aquamarine;"> 
-    <form method="post" action="{{url_for('admin.upload')}}">
+    <form method="post" >
     {{ wz.csrf_token }}
     文章标题{{wz.title}}
     文章分类：{{wz.category}}

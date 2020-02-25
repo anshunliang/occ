@@ -126,7 +126,20 @@ def cjfl():
 #添加文章
 @admin_bp.route('/tj', methods=['GET', 'POST'])
 def tj():
+    
     wz=PostForm()
+    if wz.validate_on_submit():
+        title = wz.title.data
+        body = wz.body.data
+        category = Category.query.get(request.form['category'])
+        print(title)
+        print(body)
+        print(category)
+        print('数据通过验证')
+        n=Post(title=title,body=body,category=category)
+        db.session.add(n)
+        db.session.commit()
+        return redirect(url_for('admin.a'))
     '''
     if request.method == 'POST':  # 如果请求类型为POST，说明是文件上传请求
         title = request.form['title']
@@ -193,4 +206,11 @@ def upload():
         return upload_fail(message='Image only!')
     f.save(os.path.join('F:\\LCC\\tupian', f.filename))
     url=url_for('admin.uploaded_files', filename=f.filename)
+
+    
+
+
     return upload_success(url=url)
+
+
+#接收文章
