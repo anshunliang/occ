@@ -33,11 +33,11 @@ def create_app(config_name=None):
 
 
     app.config['CKEDITOR_SERVE_LOCAL'] = True
-    app.config['CKEDITOR_HEIGHT'] = 400
+    app.config['CKEDITOR_HEIGHT'] = 300
     app.config['CKEDITOR_FILE_UPLOADER'] = 'admin.upload'
     # app.config['CKEDITOR_ENABLE_CSRF'] = True  # if you want to enable CSRF protect, uncomment this line
     app.config['UPLOADED_PATH'] = os.path.join(basedir, 'uploads')
-    
+    app.config['CKEDITOR_ENABLE_CODESNIPPET'] = True   #开启代码语法高亮
     #注册蓝本
     app.register_blueprint(admin_bp)    
     

@@ -40,29 +40,32 @@ def a(page):
 #分类展示函数
 @admin_bp.route('/d')
 def d():
-        page=request.args.get('page',1,type=int)
-        per_page=3
-        pagination=Post.query.filter_by(category_id=Category.query.filter_by(name='anhsunpp').first().id).order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
-        m=pagination.items
-        return render_template('a.html',m=m,page=page,pagination=pagination)
+    lg=LoginForm()   
+    page=request.args.get('page',1,type=int)
+    per_page=3
+    pagination=Post.query.filter_by(category_id=Category.query.filter_by(name='anhsunpp').first().id).order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
+    m=pagination.items
+    return render_template('a.html',m=m,page=page,pagination=pagination,lg=lg)
 
 #分类展示函数
 @admin_bp.route('/e')
 def e():
-        page=request.args.get('page',1,type=int)
-        per_page=3
-        pagination=Post.query.filter_by(category_id=Category.query.filter_by(name='cc').first().id).order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
-        m=pagination.items
-        return render_template('a.html',m=m,page=page,pagination=pagination)
+    lg=LoginForm()
+    page=request.args.get('page',1,type=int)
+    per_page=3
+    pagination=Post.query.filter_by(category_id=Category.query.filter_by(name='cc').first().id).order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
+    m=pagination.items
+    return render_template('a.html',m=m,page=page,pagination=pagination,lg=lg)
 
 #分类展示函数
 @admin_bp.route('/f')
 def f():
-        page=request.args.get('page',1,type=int)
-        per_page=3
-        pagination=Post.query.filter_by(category_id=Category.query.filter_by(name='anhsun').first().id).order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
-        m=pagination.items
-        return render_template('a.html',m=m,page=page,pagination=pagination)
+    lg=LoginForm()
+    page=request.args.get('page',1,type=int)
+    per_page=3
+    pagination=Post.query.filter_by(category_id=Category.query.filter_by(name='anhsun').first().id).order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
+    m=pagination.items
+    return render_template('a.html',m=m,page=page,pagination=pagination,lg=lg)
 
 #注册函数  
 @admin_bp.route('/zhuce', methods=['GET', 'POST'])
@@ -193,7 +196,7 @@ def show_post(post_id):
 
 @admin_bp.route('/files/<filename>')
 def uploaded_files(filename):
-    path = 'F:\\LCC\\bluelog\\templates\\files'
+    path = 'F:\\LCC\\bluelog\\templates\\files'  #这个地址要和  def upload()  里面保存的地址一样
     return send_from_directory(path, filename)
 
 
@@ -206,9 +209,6 @@ def upload():
         return upload_fail(message='Image only!')
     f.save(os.path.join('F:\\LCC\\bluelog\\templates\\files', f.filename))
     url=url_for('admin.uploaded_files', filename=f.filename)
-
-    
-
 
     return upload_success(url=url)
 
