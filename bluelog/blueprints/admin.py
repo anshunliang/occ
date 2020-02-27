@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-
+import re
 from flask import render_template, flash, redirect, url_for, request, current_app, Blueprint, send_from_directory
 from flask_login import LoginManager,login_user,login_required, logout_user,current_user
 from bluelog.models import Admin
@@ -131,14 +131,17 @@ def cjfl():
 def tj():
     
     wz=PostForm()
+    #接收文章
     if wz.validate_on_submit():
         title = wz.title.data
-        body = wz.body.data
+        body = wz.body.data   #从这个body里面提取出图片名
+        bf=body[20:33]
         category = Category.query.get(request.form['category'])
-        print(title)
         print(body)
-        print(category)
-        print('数据通过验证')
+        #使用正则表达式匹配文件名
+        x=re.findall(r'\bf\S*?G\b',body)
+        print('匹配到的文件名:'+x[0])
+      
         n=Post(title=title,body=body,category=category)
         db.session.add(n)
         db.session.commit()
@@ -159,6 +162,15 @@ def tj():
         #return render_template('tj.html',wz=wz)
     '''
     return render_template('tj.html',wz=wz)
+
+#删除文章
+@admin_bp.route('/delete/<int:wz_id>',methods=['POST'])
+def delete(wz_id):
+    n=Post.query.get_or_404(wz.id)
+    db.session.delete(n)
+    db.session.commit()
+    return redirect(url_for('two.a'))
+
 
 
 #接收图片
@@ -213,4 +225,3 @@ def upload():
     return upload_success(url=url)
 
 
-#接收文章
