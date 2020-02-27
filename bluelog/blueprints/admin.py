@@ -137,10 +137,14 @@ def tj():
         body = wz.body.data   #从这个body里面提取出图片名
         bf=body[20:33]
         category = Category.query.get(request.form['category'])
-        print(body)
+        #print(body)
         #使用正则表达式匹配文件名
         x=re.findall(r'\bf\S*?G\b',body)
-        print('匹配到的文件名:'+x[0])
+        #print('匹配到的文件名:'+x[0])
+        #print('匹配到的文件名:'+x[1])
+        for i in x:
+            print('匹配到的文件名:'+i)
+
       
         n=Post(title=title,body=body,category=category)
         db.session.add(n)
