@@ -10,7 +10,7 @@ from bluelog.models import Admin,Category,Post
 from bluelog.forms import PostForm,LoginForm   ###导入同级目录中的表单定义文件
 from flask_ckeditor import CKEditor, CKEditorField, upload_fail, upload_success
 from flask import send_from_directory
-
+from flask_dropzone import random_filename
 
 
 admin_bp = Blueprint('admin', __name__)  #定义蓝本
@@ -142,9 +142,10 @@ def tj():
         x=re.findall(r'\bf\S*?G\b',body)
         #print('匹配到的文件名:'+x[0])
         #print('匹配到的文件名:'+x[1])
+        '''
         for i in x:
             print('匹配到的文件名:'+i)
-
+        '''    
       
         n=Post(title=title,body=body,category=category)
         db.session.add(n)
@@ -220,11 +221,12 @@ def uploaded_files(filename):
 def upload():
     f = request.files.get('upload')
     extension = f.filename.split('.')[1].lower()
-    print(f.filename)
+    #print(f.filename)
+    filename=random_filename(f.filename)
     if extension not in ['jpg', 'gif', 'png', 'jpeg']:
         return upload_fail(message='Image only!')
-    f.save(os.path.join('F:\\LCC\\bluelog\\templates\\files', f.filename))
-    url=url_for('admin.uploaded_files', filename=f.filename)
+    f.save(os.path.join('F:\\LCC\\bluelog\\templates\\files', filename))
+    url=url_for('admin.uploaded_files', filename=filename)
 
     return upload_success(url=url)
 
