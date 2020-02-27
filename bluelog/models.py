@@ -28,5 +28,5 @@ class Post(db.Model):
     timestamp=db.Column(db.DateTime,default=datetime.utcnow,index=True)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))      #定义到分类模型的外键，注意在多的这一侧建立外键 
     category = db.relationship('Category', back_populates='posts')          #与分类模型的标量关系属性
-
+    tpname=db.Column(db.Text)
 
