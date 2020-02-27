@@ -15,6 +15,10 @@ from flask_dropzone import random_filename
 
 admin_bp = Blueprint('admin', __name__)  #定义蓝本
 ckeditor = CKEditor()
+
+
+global tp   #定义文件名的全局变量
+tp=list()   #初始化为一个列表
 #主页函数
 
 @admin_bp.route('/',defaults={'page':1},methods=['post','get'])
@@ -142,6 +146,9 @@ def tj():
         x=re.findall(r'\bf\S*?G\b',body)
         #print('匹配到的文件名:'+x[0])
         #print('匹配到的文件名:'+x[1])
+        for i in tp:
+            print('全局变量'+i)
+        tp.clear()  #清空文件名列表
         '''
         for i in x:
             print('匹配到的文件名:'+i)
@@ -222,7 +229,10 @@ def upload():
     f = request.files.get('upload')
     extension = f.filename.split('.')[1].lower()
     #print(f.filename)
+    
+   
     filename=random_filename(f.filename)
+    tp.append(filename)
     if extension not in ['jpg', 'gif', 'png', 'jpeg']:
         return upload_fail(message='Image only!')
     f.save(os.path.join('F:\\LCC\\bluelog\\templates\\files', filename))
