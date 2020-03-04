@@ -141,20 +141,15 @@ def tj():
         body = wz.body.data   #从这个body里面提取出图片名
         bf=body[20:33]
         category = Category.query.get(request.form['category'])
-        #print(body)
         #使用正则表达式匹配文件名
-        x=re.findall(r'\bf\S*?G\b',body)
-        #print('匹配到的文件名:'+x[0])
-        #print('匹配到的文件名:'+x[1])
+        #x=re.findall(r'\bf\S*?G\b',body) #此处匹配f开头，G结束的字符串
+
+        tpn=""   #初始化图片名字符串
         for i in tp:
-            print('全局变量'+i)
-        tp.clear()  #清空文件名列表
-        '''
-        for i in x:
-            print('匹配到的文件名:'+i)
-        '''    
+            tpn=tpn+i+","
+        tp.clear()  #清空全局列表  
       
-        n=Post(title=title,body=body,category=category)
+        n=Post(title=title,body=body,category=category,tpname=tpn)
         db.session.add(n)
         db.session.commit()
         return redirect(url_for('admin.a'))
@@ -176,12 +171,12 @@ def tj():
     return render_template('tj.html',wz=wz)
 
 #删除文章
-@admin_bp.route('/delete/<int:wz_id>',methods=['POST'])
-def delete(wz_id):
-    n=Post.query.get_or_404(wz.id)
+@admin_bp.route('/delete/<int:post_id>',methods=['GET','POST'])
+def delete(post_id):
+    n=Post.query.get_or_404(post_id)
     db.session.delete(n)
     db.session.commit()
-    return redirect(url_for('two.a'))
+    return redirect(url_for('admin.a'))
 
 
 
