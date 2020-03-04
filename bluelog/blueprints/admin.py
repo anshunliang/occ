@@ -174,6 +174,14 @@ def tj():
 @admin_bp.route('/delete/<int:post_id>',methods=['GET','POST'])
 def delete(post_id):
     n=Post.query.get_or_404(post_id)
+    x=n.tpname.split(",")   #待删除的图片名列表
+    for i in x:
+        if i=="":
+            break
+        os.remove("F:\\LCC\\bluelog\\templates\\files"+"\\"+i)
+        #print("F:\\LCC\\bluelog\\templates\\files"+"\\"+i)
+        
+  
     db.session.delete(n)
     db.session.commit()
     return redirect(url_for('admin.a'))
