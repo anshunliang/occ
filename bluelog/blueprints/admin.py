@@ -179,7 +179,7 @@ def delete(post_id):
         if i=="":
             break
         os.remove("F:\\LCC\\bluelog\\templates\\files"+"\\"+i)
-        #print("F:\\LCC\\bluelog\\templates\\files"+"\\"+i)
+        
         
   
     db.session.delete(n)
