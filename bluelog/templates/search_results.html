@@ -34,23 +34,17 @@ background-color:#dddddd;
 
 
 <p>搜索结果</p>
-{% for post in results %}
-    
-
-
-
-
 
 <div style="width: 900px;height: 600px;;margin: 0 auto;overflow-y:scroll;background-color: azure;padding: 20px;">
+{% for post in results %}
     
     <h3>{{post.title}}</h3>
     {{ post.body|striptags|truncate(200) }}
     <a style="color:greenyellow" href="{{url_for('admin.show_post',post_id=post.id)}}">阅读更多</a><a style="color:greenyellow" href="{{url_for('admin.delete',post_id=post.id)}}">删除</a></small></p>
+            
+{% endfor %}
+
 </div>
-                
-    {% endfor %}
-
-
 
 
 
