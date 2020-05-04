@@ -19,7 +19,7 @@ import os
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 dropzone = Dropzone()
-login_manager = LoginManager() 
+login_manager = LoginManager() #实例化登录类
 ckeditor = CKEditor()
 csrf = CSRFProtect()
 def create_app(config_name=None):
@@ -45,7 +45,7 @@ def create_app(config_name=None):
     #初始化扩展
     db.init_app(app)  
     csrf.init_app(app)     
-    login_manager.init_app(app)
+    login_manager.init_app(app)   #初始化登录类
     dropzone.init_app(app)
     ckeditor.init_app(app)
     
@@ -62,6 +62,8 @@ def register_shell_context(app):
     def make_shell_context():
         return dict(db=db, Admin=Admin)
 
+
+#关于登录必须的一个回调函数
 @login_manager.user_loader
 def load_user(user_id):
     from bluelog.models import Admin

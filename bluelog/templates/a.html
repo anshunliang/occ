@@ -50,10 +50,14 @@ background-color:#dddddd;
           <form method="post" action="{{url_for('admin.zhuce')}}">
               
               <h3>注册用户</h3>
-              {{ lg.csrf_token }}
+              
+           
+                {{ lg.csrf_token }}
               用户名：<input type="text" name="username" ><br>
               密码哦：<input type="text" name="password_hash" ><br>
               {{csrf_token}}
+              
+              
               
               <input class="btn" type="submit"value="注册"  >
           </form>
@@ -91,7 +95,7 @@ background-color:#dddddd;
       <h3>{{i.title}}  <small>类别：{{i.category.name}}</small></h3>
       
       
-      <p >{{i.body|striptags|truncate}}<small><a style="color:greenyellow" href="{{url_for('admin.show_post',post_id=i.id)}}">阅读更多</a><a style="color:greenyellow" href="{{url_for('admin.delete',post_id=i.id)}}">删除</a></small></p>
+      <p >{{i.body|striptags|truncate(100)}}<small><a style="color:greenyellow" href="{{url_for('admin.show_post',post_id=i.id)}}">阅读更多</a><a style="color:greenyellow" href="{{url_for('admin.delete',post_id=i.id)}}">删除</a></small></p>
     
       <!--渲染删除按钮-->
 
