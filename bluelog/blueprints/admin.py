@@ -14,6 +14,10 @@ from flask_dropzone import random_filename
 import flask_whooshalchemyplus
 
 
+
+
+
+
 admin_bp = Blueprint('admin', __name__)  #定义蓝本
 ckeditor = CKEditor()
 
@@ -181,18 +185,17 @@ def delete(post_id):
         if i=="":
             break
         os.remove("F:\\LCC\\bluelog\\templates\\files"+"\\"+i)
-        
-        
   
     db.session.delete(n)
     db.session.commit()
     return redirect(url_for('admin.a'))
 
 
-
 #接收图片
+
 @admin_bp.route('/x', methods=['GET', 'POST'])
 def x():
+    print('kkkkkkkkkkkkkkkkkkkkkkk')
     if request.method == 'POST':  # 如果请求类型为POST，说明是文件上传请求
         f = request.files.get('file')  # 获取文件对象
         print(f.filename)
@@ -200,6 +203,7 @@ def x():
         return render_template('a.html')
     
     return render_template('a.html')
+
 
 #测试页面
 @admin_bp.route('/xx', methods=['GET', 'POST'])
@@ -211,16 +215,14 @@ def xx():
     
     return render_template('test.html')
 
+
+
 #文章视图
 @admin_bp.route('/post/<int:post_id>',methods=['POST','get'])
 def show_post(post_id):
     post=Post.query.get_or_404(post_id)
     
     return render_template('show.html',post=post)
-
-
-
-
 
 
 @admin_bp.route('/files/<filename>')
@@ -233,8 +235,6 @@ def uploaded_files(filename):
 def upload():
     f = request.files.get('upload')
     extension = f.filename.split('.')[1].lower()
-    #print(f.filename)
-    
    
     filename=random_filename(f.filename)
     tp.append(filename)

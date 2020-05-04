@@ -15,6 +15,9 @@ from flask_wtf.csrf  import CSRFProtect,generate_csrf
 import flask_whooshalchemyplus
 from jieba.analyse.analyzer import ChineseAnalyzer
 
+
+
+
 import os
 
 
@@ -65,10 +68,11 @@ def create_app(config_name=None):
     return app
 
 
+#全局上下文变量
 def register_shell_context(app):
     @app.context_processor
     def make_shell_context():
-        return dict(db=db, Admin=Admin)
+        return dict(db=db, Admin=Admin,pp='kkkkkkkkkkkkk')
 
 
 #关于登录必须的一个回调函数
