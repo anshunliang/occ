@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<!--内容填充-->
+
+
+
+<!--展示所有类名-->
+<div style="background-color: blueviolet;">
+    <h3>包含如下分类</h3>
+{% for i in category %}
+<p>{{i.name}}</p>
+
+<a style="color:greenyellow" href="{{url_for('gly.shanchu',category_id=i.id)}}">删除该分类</a>
+{% endfor %}
+</div>
+
+<!--增加分类表单-->
+<div style="background-color: goldenrod;padding-top: 50px;">
+    <h3>增加文章分类</h3>
+    <form method="post" action="{{url_for('gly.add')}}">
+        {{ cf.csrf_token }}
+        {{ cf.name }}<br>
+        
+        <input class="btn"  type="submit" name="submit" value="添加">                   
+      </form>
+</div>
+
+
+
+{% endblock %}

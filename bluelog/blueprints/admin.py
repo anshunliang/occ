@@ -43,33 +43,33 @@ def a(page):
     return render_template('a.html',m=m,page=page,pagination=pagination,lg=lg)
 
 
-#分类展示函数
+#python分类展示函数
 @admin_bp.route('/d')
 def d():
     lg=LoginForm()   
     page=request.args.get('page',1,type=int)
     per_page=3
-    pagination=Post.query.filter_by(category_id=Category.query.filter_by(name='anhsunpp').first().id).order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
+    pagination=Post.query.filter_by(category_id=Category.query.filter_by(name='python').first().id).order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
     m=pagination.items
     return render_template('a.html',m=m,page=page,pagination=pagination,lg=lg)
 
-#分类展示函数
+#labview分类展示函数
 @admin_bp.route('/e')
 def e():
     lg=LoginForm()
     page=request.args.get('page',1,type=int)
     per_page=3
-    pagination=Post.query.filter_by(category_id=Category.query.filter_by(name='cc').first().id).order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
+    pagination=Post.query.filter_by(category_id=Category.query.filter_by(name='labview').first().id).order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
     m=pagination.items
     return render_template('a.html',m=m,page=page,pagination=pagination,lg=lg)
 
-#分类展示函数
+#西门子工业控制分类展示函数
 @admin_bp.route('/f')
 def f():
     lg=LoginForm()
     page=request.args.get('page',1,type=int)
     per_page=3
-    pagination=Post.query.filter_by(category_id=Category.query.filter_by(name='anhsun').first().id).order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
+    pagination=Post.query.filter_by(category_id=Category.query.filter_by(name='西门子工业控制').first().id).order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
     m=pagination.items
     return render_template('a.html',m=m,page=page,pagination=pagination,lg=lg)
 
@@ -255,7 +255,7 @@ def search():
             return redirect(url_for('.index'))
         return redirect(url_for('.search_results', query = request.form['search']))
  
- 
+#搜索，返回结果
 @admin_bp.route('/search_results/<query>')
 def search_results(query):
     results = Post.query.whoosh_search(query).all()

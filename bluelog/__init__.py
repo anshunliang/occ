@@ -5,6 +5,7 @@
 from flask import Flask, render_template, request
 from bluelog.settings import config
 from bluelog.blueprints.admin import admin_bp
+from bluelog.blueprints.gly import gly_bp
 from bluelog.extensions import db
 from bluelog.models import Admin
 from flask_login import LoginManager
@@ -15,12 +16,13 @@ import flask_whooshalchemyplus
 from jieba.analyse.analyzer import ChineseAnalyzer
 
 import os
-##
-##
+
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+
+
+#实例化类
 dropzone = Dropzone()
-#flask_whooshalchemyplus=flask_whooshalchemyplus()
 login_manager = LoginManager() #实例化登录类
 ckeditor = CKEditor()
 csrf = CSRFProtect()
@@ -40,8 +42,11 @@ def create_app(config_name=None):
     # app.config['CKEDITOR_ENABLE_CSRF'] = True  # if you want to enable CSRF protect, uncomment this line
     app.config['UPLOADED_PATH'] = os.path.join(basedir, 'uploads')
     app.config['CKEDITOR_ENABLE_CODESNIPPET'] = True   #开启代码语法高亮
+
+
     #注册蓝本
-    app.register_blueprint(admin_bp)    
+    app.register_blueprint(admin_bp)   
+    app.register_blueprint(gly_bp) 
     
     
     #初始化扩展
