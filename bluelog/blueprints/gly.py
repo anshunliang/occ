@@ -50,7 +50,7 @@ def shanchu():
 
     return redirect(url_for('.gly'))
 
-#增加分离
+#增加分类
 @gly_bp.route('/add',methods=['get','post'])
 def add():
     form=CategoryForm()

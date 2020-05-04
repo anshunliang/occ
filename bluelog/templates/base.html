@@ -103,6 +103,21 @@
 
 <!--所有js函数全部写在这里面-->
 <script>
+
+function myfun()
+   {
+       if (window.location.search)
+       {alert(window.location.href );}
+       
+    }
+/*用window.onload调用myfun()*/
+//页面加载结束后自动执行函数
+window.onload=myfun;
+
+
+
+
+
 //显示注册弹窗的函数
     function zc() {
         var a=document.getElementById('zc');
@@ -125,6 +140,8 @@ function xs0() {
     var a=document.getElementById('tc');
     a.style.display='none'
 }
+
+//提示消息
 
 
 
