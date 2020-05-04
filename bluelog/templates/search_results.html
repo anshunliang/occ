@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+
+
+
+
+<!--风格填充-->
+{% block styles %}
+<style>
+#a
+{
+list-style-type:none;
+margin:0;
+padding:0;
+
+}
+#b
+{
+display:block;
+width: 100px;
+background-color:#dddddd;
+}
+
+</style>
+{% endblock styles %}
+
+
+
+<!--内容填充-->
+<!--内容填充-->
+{% block content %}
+
+
+
+
+<p>搜索结果</p>
+{% for post in results %}
+    
+
+
+
+
+
+<div style="width: 900px;height: 600px;;margin: 0 auto;overflow-y:scroll;background-color: azure;padding: 20px;">
+    
+    <h3>{{post.title}}</h3>
+    {{ post.body|striptags|truncate(200) }}
+    <a style="color:greenyellow" href="{{url_for('admin.show_post',post_id=post.id)}}">阅读更多</a><a style="color:greenyellow" href="{{url_for('admin.delete',post_id=post.id)}}">删除</a></small></p>
+</div>
+                
+    {% endfor %}
+
+
+
+
+
+
+     
+
+
+{% endblock %}
+

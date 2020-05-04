@@ -5,6 +5,7 @@ from datetime import datetime
 
 from bluelog.extensions import db
 from flask_login import UserMixin
+from jieba.analyse.analyzer import ChineseAnalyzer
 
 #用户模型
 class Admin(db.Model,UserMixin):
@@ -22,6 +23,8 @@ class Category(db.Model):
 
 #文章模型
 class Post(db.Model):
+    __searchable__ = ['body', 'title']
+    __analyzer__ = ChineseAnalyzer()
     id=db.Column(db.Integer,primary_key=True)
     title=db.Column(db.String(60))
     body=db.Column(db.Text)

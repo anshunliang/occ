@@ -11,6 +11,7 @@ from bluelog.forms import PostForm,LoginForm   ###导入同级目录中的表单
 from flask_ckeditor import CKEditor, CKEditorField, upload_fail, upload_success
 from flask import send_from_directory
 from flask_dropzone import random_filename
+import flask_whooshalchemyplus
 
 
 admin_bp = Blueprint('admin', __name__)  #定义蓝本
@@ -24,6 +25,7 @@ tp=list()   #初始化为一个列表
 @admin_bp.route('/',defaults={'page':1},methods=['post','get'])
 @admin_bp.route('/page/<int:page>', methods=['GET', 'POST'])
 def a(page):
+    
     lg=LoginForm() 
     per_page=3
     pagination= Post.query.order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
@@ -244,3 +246,19 @@ def upload():
     return upload_success(url=url)
 
 
+#获取搜索框内容，然后重定向到搜索函数
+@admin_bp.route('/search', methods = ['POST'])
+def search():
+    if request.method=='POST':
+        flask_whooshalchemyplus.index_one_model(Post)
+        if not request.form['search']:
+            return redirect(url_for('.index'))
+        return redirect(url_for('.search_results', query = request.form['search']))
+ 
+ 
+@admin_bp.route('/search_results/<query>')
+def search_results(query):
+    results = Post.query.whoosh_search(query).all()
+    print(query)
+    print(results)
+    return render_template('search_results.html', query = query, results = results)

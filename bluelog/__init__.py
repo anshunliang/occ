@@ -11,7 +11,8 @@ from flask_login import LoginManager
 from flask_dropzone import Dropzone
 from flask_ckeditor import CKEditor, CKEditorField
 from flask_wtf.csrf  import CSRFProtect,generate_csrf
-
+import flask_whooshalchemyplus
+from jieba.analyse.analyzer import ChineseAnalyzer
 
 import os
 ##
@@ -19,6 +20,7 @@ import os
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 dropzone = Dropzone()
+#flask_whooshalchemyplus=flask_whooshalchemyplus()
 login_manager = LoginManager() #实例化登录类
 ckeditor = CKEditor()
 csrf = CSRFProtect()
@@ -48,6 +50,7 @@ def create_app(config_name=None):
     login_manager.init_app(app)   #初始化登录类
     dropzone.init_app(app)
     ckeditor.init_app(app)
+    flask_whooshalchemyplus.init_app(app)
     
     register_shell_context(app)
 

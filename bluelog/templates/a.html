@@ -85,6 +85,18 @@ background-color:#dddddd;
   </div>
 
 <!--{{ dropzone.create(action='admin.x') }}-->
+
+<!---搜索框-->
+<div>
+
+    <form class="navbar-form navbar-left" action="{{url_for('admin.search')}}" method="POST">
+      {{ lg.csrf_token }}
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="站内搜索" name="search" >
+        </div>
+        <button type="submit" class="btn btn-default">搜索</button>
+    </form>
+  </div>
   
 
  <!--文章展示--> 
