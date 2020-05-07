@@ -1,28 +1,34 @@
 body{
     margin-top:10px;
     padding-top: 200px;
-    background:forestgreen;
+    background:white;
     
 }
 
-ul{
+
+/* 下面4个id是导航栏设置 */ 
+#u1{
     list-style-type:none;
     margin:0;
     padding:0;
     overflow:hidden;}
+   
+#p1{float:left;}
     
-li{float:left;}
-    
-a:link,a:visited{
+#x1:link,a:visited{
     display:block;
     width:120px;
     font-weight:bold;
-    color:#FFFFFF;
-    background-color:#bebebe;
+    color:black;
+    background-color:white;
     text-align:center;
     padding:4px;
     text-decoration:none;
     text-transform:uppercase;}
     
-a:hover,a:active{
-    background-color:#cc0000;}
+#x1:hover,#x1:active{
+    background-color:#0025cc;}
+
+
+
+#i1 {color:green;}

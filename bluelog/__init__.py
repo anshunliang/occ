@@ -72,7 +72,7 @@ def create_app(config_name=None):
 def register_shell_context(app):
     @app.context_processor
     def make_shell_context():
-        return dict(db=db, Admin=Admin,pp='kkkkkkkkkkkkk')
+        return dict(db=db, Admin=Admin,pp='春江花月夜')
 
 
 #关于登录必须的一个回调函数

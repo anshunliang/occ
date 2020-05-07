@@ -38,16 +38,16 @@
 <div style="position: fixed; top:3%; left:30%;min-width: 650px;margin-bottom: 0;" >
     
     
-        <ul>
-          <li><a href="/">主页</a></li>
-          <li><a href="{{url_for('admin.d')}}">python</a></li>
-          <li><a href="{{url_for('admin.e')}}">labview</a></li>
-          <li><a href="{{url_for('admin.f')}}">西门子工业控制</a></li>
+        <ul id="u1">
+          <li id="p1"><a id="x1" href="/">主页</a></li>
+          <li id="p1"><a id="x1" href="{{url_for('admin.d')}}">python</a></li>
+          <li id="p1"><a id="x1" href="{{url_for('admin.e')}}">labview</a></li>
+          <li id="p1"><a id="x1" href="{{url_for('admin.f')}}">西门子工业控制</a></li>
           {% if not current_user.is_authenticated %}  <!--验证是否已登录-->
-          <li><a href="#about" id='xs' onclick="xs();">登录</a></li>
+          <li id="p1"><a id="x1" href="#about" id='xs' onclick="xs();">登录</a></li>
           {% endif %}
           {% if current_user.is_authenticated %}  <!--验证是否已登录-->
-          <li><a href="{{url_for('admin.logout')}}"> 注销登录</a></li>
+          <li id="p1"><a id="x1" href="{{url_for('admin.logout')}}"> 注销登录</a></li>
           {% endif %}
         </ul>
 </div>
@@ -59,11 +59,11 @@
 {% if current_user.is_authenticated %}  <!--验证是否已登录-->
 <div style="width:110px;float:left;padding:0px">
     
-        <ul id="a">
+        <ul id="u1">
             <p><a id="b" href="{{url_for('admin.tj')}}" style="color:black;">添加笔记</a></p>
             <p><a id="b" href="{{url_for('gly.gly')}}" style="color:black;">网站后台管理</a></p>
             <p><a id="b" href="#home" style="color:black;">Home</a></p>
-            <p><a id="b" href="#home" style="color:black;">个人资料</a></p>   
+            <p><a id="b" href="#home" style="color:black;">个人主页</a></p>   
         </ul>
     
     

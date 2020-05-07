@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os
-import re
+import os,re,platform
 from flask import render_template, flash, redirect, url_for, request, current_app, Blueprint, send_from_directory
 from flask_login import LoginManager,login_user,login_required, logout_user,current_user
 from bluelog.models import Admin
@@ -31,7 +30,7 @@ tp=list()   #初始化为一个列表
 def a(page):
     
     lg=LoginForm() 
-    per_page=3
+    per_page=2
     pagination= Post.query.order_by(Post.timestamp.desc()).paginate(page,per_page=per_page)
     m=pagination.items
     if request.method=='POST':
