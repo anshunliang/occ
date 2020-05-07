@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding:utf-8 -*-
 
 import os,re,platform
 from flask import render_template, flash, redirect, url_for, request, current_app, Blueprint, send_from_directory

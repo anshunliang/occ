@@ -106,8 +106,10 @@ background-color:#dddddd;
       <div>
       <h4>{{i.title}}  <small>类别：{{i.category.name}}</small></h4>
       <a id='i1' href="{{url_for('admin.show_post',post_id=i.id)}}">阅读更多</a>
+      <!--根据是否为管理员登录来渲染删除按钮-->
+      {% if current_user.username=="cc" %}
       <a id='i1' href="{{url_for('admin.delete',post_id=i.id)}}">删除</a></small></p>
-      
+      {% endif %}
       
       <p >{{i.body|striptags|truncate(100)}}<small>
       

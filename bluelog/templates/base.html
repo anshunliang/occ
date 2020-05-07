@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
- 
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=GB2312" />
 {% block head %}
     <title> Albumy</title>
 
@@ -60,10 +60,10 @@
 <div style="width:110px;float:left;padding:0px">
     
         <ul id="u1">
-            <p><a id="b" href="{{url_for('admin.tj')}}" style="color:black;">添加笔记</a></p>
-            <p><a id="b" href="{{url_for('gly.gly')}}" style="color:black;">网站后台管理</a></p>
-            <p><a id="b" href="#home" style="color:black;">Home</a></p>
-            <p><a id="b" href="#home" style="color:black;">个人主页</a></p>   
+            <p id="p1"><a id="x1" href="{{url_for('admin.tj')}}" style="color:black;">添加笔记</a></p>
+            <p id="p1"><a id="x1" href="{{url_for('gly.gly')}}" style="color:black;">网站后台管理</a></p>
+            <p id="p1"><a id="x1" href="#home" style="color:black;">Home</a></p>
+            <p id="p1"><a id="x1" href="#home" style="color:black;">个人主页</a></p>   
         </ul>
     
     
@@ -102,13 +102,13 @@
 
 
 <!--所有js函数全部写在这里面-->
-<script>
+<script charset="GB2312" language="javascript" type="text/javascript">
 
 function myfun()
    {
-       if (window.location.search)
-       {alert(window.location.href );}
-       
+    var url = decodeURI(location.search); //获取url中"?"符后的字符串 
+      
+      alert(url);
     }
 /*用window.onload调用myfun()*/
 //页面加载结束后自动执行函数
