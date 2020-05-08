@@ -108,10 +108,11 @@ background-color:#dddddd;
       <a id='i1' href="{{url_for('admin.show_post',post_id=i.id)}}">阅读更多</a>
       <!--根据是否为管理员登录来渲染删除按钮-->
       {% if current_user.username=="cc" %}
-      <a id='i1' href="{{url_for('admin.delete',post_id=i.id)}}">删除</a></small></p>
+      <a id='i1' href="{{url_for('admin.delete',post_id=i.id)}}">删除</a>
       {% endif %}
+      <a id='i1'>作者：{{Admin.query.get(i.admin_id).username}}</a>                             </small></p>
       
-      <p >{{i.body|striptags|truncate(100)}}<small>
+      <p >{{i.body|striptags|truncate(50)}}<small>
       
     
       <!--渲染删除按钮-->

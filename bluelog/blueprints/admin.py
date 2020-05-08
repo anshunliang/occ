@@ -154,7 +154,7 @@ def tj():
             tpn=tpn+i+","
         tp.clear()  #清空全局列表  
       
-        n=Post(title=title,body=body,category=category,tpname=tpn)
+        n=Post(title=title,body=body,category=category,tpname=tpn,admin_id=current_user.id)
         db.session.add(n)
         db.session.commit()
         return redirect(url_for('admin.a'))

@@ -6,8 +6,9 @@ from flask import Flask, render_template, request
 from bluelog.settings import config
 from bluelog.blueprints.admin import admin_bp
 from bluelog.blueprints.gly import gly_bp
+from bluelog.blueprints.user import user_bp
 from bluelog.extensions import db
-from bluelog.models import Admin
+from bluelog.models import Admin,Post
 from flask_login import LoginManager
 from flask_dropzone import Dropzone
 from flask_ckeditor import CKEditor, CKEditorField
@@ -50,6 +51,7 @@ def create_app(config_name=None):
     #注册蓝本
     app.register_blueprint(admin_bp)   
     app.register_blueprint(gly_bp) 
+    app.register_blueprint(user_bp) 
     
     
     #初始化扩展
@@ -72,7 +74,7 @@ def create_app(config_name=None):
 def register_shell_context(app):
     @app.context_processor
     def make_shell_context():
-        return dict(db=db, Admin=Admin,pp='春江花月夜')
+        return dict(db=db, Admin=Admin,pp='春江花月夜',Post=Post)
 
 
 #关于登录必须的一个回调函数
