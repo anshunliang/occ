@@ -12,6 +12,10 @@ class Admin(db.Model,UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20))
     password_hash = db.Column(db.String(128))
+    addresses = db.relationship('Post', backref='admin',
+                                lazy='dynamic')
+
+
 
 #类别模型
 class Category(db.Model):
@@ -32,4 +36,5 @@ class Post(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))      #定义到分类模型的外键，注意在多的这一侧建立外键 
     category = db.relationship('Category', back_populates='posts')          #与分类模型的标量关系属性
     tpname=db.Column(db.Text)
-
+    admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'))
+    
