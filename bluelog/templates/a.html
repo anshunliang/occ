@@ -103,15 +103,14 @@ background-color:#dddddd;
  <div style="margin:0 auto; width:800px; height:500px;padding: 30px;overflow-y:scroll" > <!--让div居中显示-->
     
       {% for i in m %} 
-      <div>
+     
       <h4>{{i.title}}  <small>类别：{{i.category.name}}</small></h4>
-      <a id='i1' href="{{url_for('admin.show_post',post_id=i.id)}}">阅读更多</a>
+      <a href="{{url_for('admin.show_post',post_id=i.id)}}">阅读更多</a>
       <!--根据是否为管理员登录来渲染删除按钮-->
       {% if current_user.username=="cc" %}
-      <a id='i1' href="{{url_for('admin.delete',post_id=i.id)}}">删除</a>
+      <a href="{{url_for('admin.delete',post_id=i.id)}}">删除</a>
       {% endif %}
-      <a id='i1'>作者：{{Admin.query.get(i.admin_id).username}}</a>                             </small></p>
-      
+      <a>作者：{{Admin.query.get(i.admin_id).username}}</a>                             </small></p>
       <p >{{i.body|striptags|truncate(50)}}<small>
       
     
@@ -119,22 +118,22 @@ background-color:#dddddd;
 
   
       <hr/>  <!--生成一条分界线-->
-      </div>
+   
       {% endfor %}   
       
       
       <!--渲染分页导航部件-->
+
+
+
+</div>
+
 
 <div style="width:400px; height:auto; position: fixed; top:100%; left:43%; margin-top:-100px; margin-left:-100px;padding:0px;"  >
   <a style="float:left;margin-top: 0;"  href="{{url_for(request.endpoint,page=pagination.prev_num)}}">上一页</a>
   <!-- <a>当前第{{page}}页</a> -->
   <a style="float:right;margin-top: 0;"   href="{{url_for('admin.a',page=pagination.next_num)}}">下一页</a>
 </div>
-
-</div>
-
-
-
 
 
 
