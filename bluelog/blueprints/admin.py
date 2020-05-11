@@ -183,8 +183,10 @@ def delete(post_id):
     for i in x:
         if i=="":
             break
-        os.remove("F:\\LCC\\bluelog\\templates\\files"+"\\"+i)
-  
+        if(platform.system()=='Windows'):
+            os.remove("F:\\LCC\\bluelog\\templates\\files"+"\\"+i)
+        else:
+            os.remove("/root/l/occ/bluelog/templates/files"+"/"+i)
     db.session.delete(n)
     db.session.commit()
     return redirect(url_for('admin.a'))
@@ -198,7 +200,10 @@ def x():
     if request.method == 'POST':  # 如果请求类型为POST，说明是文件上传请求
         f = request.files.get('file')  # 获取文件对象
         print(f.filename)
-        f.save(os.path.join('F:\\LCC\\tupian', f.filename))  # 保存文件
+        if(platform.system()=='Windows'):
+            f.save(os.path.join('F:\\LCC\\tupian', f.filename))  # 保存文件
+        else:
+            f.save(os.path.join("/root/l/occ/bluelog/templates/files", f.filename))
         return render_template('a.html')
     
     return render_template('a.html')
@@ -226,7 +231,10 @@ def show_post(post_id):
 
 @admin_bp.route('/files/<filename>')
 def uploaded_files(filename):
-    path = 'F:\\LCC\\bluelog\\templates\\files'  #这个地址要和  def upload()  里面保存的地址一样
+    if(platform.system()=='Windows'):
+        path = 'F:\\LCC\\bluelog\\templates\\files'  #这个地址要和  def upload()  里面保存的地址一样
+    else:
+        path="/root/l/occ/bluelog/templates/files"
     return send_from_directory(path, filename)
 
 
@@ -239,7 +247,10 @@ def upload():
     tp.append(filename)
     if extension not in ['jpg', 'gif', 'png', 'jpeg']:
         return upload_fail(message='Image only!')
-    f.save(os.path.join('F:\\LCC\\bluelog\\templates\\files', filename))
+    if(platform.system()=='Windows'):
+        f.save(os.path.join('F:\\LCC\\bluelog\\templates\\files', filename))
+    else:
+        f.save(os.path.join('/root/l/occ/bluelog/templates/files', filename))
     url=url_for('admin.uploaded_files', filename=filename)
 
     return upload_success(url=url)
