@@ -44,7 +44,7 @@
           <li id="p1"><a id="x1" href="{{url_for('admin.e')}}">labview</a></li>
           <li id="p1"><a id="x1" href="{{url_for('admin.f')}}">西门子工业控制</a></li>
           {% if not current_user.is_authenticated %}  <!--验证是否已登录-->
-          <li id="p1"><a id="x1" href="#about" id='xs' onclick="xs();">登录</a></li>
+          <li id="p1"><a id="x1"  onclick="xs();">登录</a></li>
           {% endif %}
           {% if current_user.is_authenticated %}  <!--验证是否已登录-->
           <li id="p1"><a id="x1" href="{{url_for('admin.logout')}}"> 注销登录</a></li>
