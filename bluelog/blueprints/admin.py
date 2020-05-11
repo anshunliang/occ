@@ -93,7 +93,7 @@ def zhuce():
 
 
 #登录函数
-@admin_bp.route('/login',methods=['get','post'])
+@admin_bp.route('/login',methods=['post'])
 def login():
     form=LoginForm()
     if request.method=='POST' and form.validate_on_submit():
