@@ -23,6 +23,14 @@ ckeditor = CKEditor()
 
 global tp   #定义文件名的全局变量
 tp=list()   #初始化为一个列表
+
+
+
+
+@admin_bp.route('/p')
+def p():
+    return redirect(url_for('admin.a'))
+
 #主页函数
 
 @admin_bp.route('/',defaults={'page':1},methods=['post','get'])

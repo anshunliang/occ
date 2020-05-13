@@ -16,11 +16,11 @@ from flask_wtf.csrf  import CSRFProtect,generate_csrf
 import flask_whooshalchemyplus
 from jieba.analyse.analyzer import ChineseAnalyzer
 
-
-
-
 import os
+from flask import Flask
+from flask_restful import Resource, Api
 
+app = Flask('bluelog')
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
@@ -35,10 +35,10 @@ def create_app(config_name=None):
     if config_name is None:
         config_name = os.getenv('FLASK_CONFIG', 'development')   
 
-    app = Flask('bluelog')
+    #app = Flask('bluelog')
     app.config.from_object(config[config_name])    
 
-
+    
 
     app.config['CKEDITOR_SERVE_LOCAL'] = True
     app.config['CKEDITOR_HEIGHT'] = 300
@@ -61,10 +61,9 @@ def create_app(config_name=None):
     dropzone.init_app(app)
     ckeditor.init_app(app)
     flask_whooshalchemyplus.init_app(app)
-    
     register_shell_context(app)
 
-
+    api = Api(app)
     
 
     return app
@@ -84,3 +83,6 @@ def load_user(user_id):
     user=Admin.query.get(int(user_id))
     return user
 
+
+def p():
+    print('hello world')

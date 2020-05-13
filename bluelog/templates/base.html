@@ -41,14 +41,10 @@
         <ul id="u1">
           <li id="p1"><a id="x1" href="/">主页</a></li>
           <li id="p1"><a id="x1" href="{{url_for('admin.d')}}">python</a></li>
-          <li id="p1"><a id="x1" href="{{url_for('admin.e')}}">labview</a></li>
-          <li id="p1"><a id="x1" href="{{url_for('admin.f')}}">西门子工业控制</a></li>
-          {% if not current_user.is_authenticated %}  <!--验证是否已登录-->
-          <li id="p1"><a id="x1"  onclick="xs();">登录</a></li>
-          {% endif %}
-          {% if current_user.is_authenticated %}  <!--验证是否已登录-->
-          <li id="p1"><a id="x1" href="{{url_for('admin.logout')}}"> 注销登录</a></li>
-          {% endif %}
+          <li id="p1"><a id="x1" href="{{url_for('admin.e')}}">Go</a></li>
+          <li id="p1"><a id="x1" href="{{url_for('admin.f')}}">自动控制</a></li>
+          <li id="p1"><a id="x1" href="{{url_for('admin.f')}}">火锅</a></li>
+
         </ul>
 </div>
 
@@ -56,23 +52,29 @@
 
 
 <!--根据是否登录来渲染侧边栏-->
-{% if current_user.is_authenticated %}  <!--验证是否已登录-->
 <div style="width:110px;float:left;padding:0px">
+    <ul id="u1"></ul>
+    {% if not current_user.is_authenticated %}
+    <p id="p1"></p><a id="x1"  onclick="xs();">登录</a></p>
+    {% endif %}
+{% if current_user.is_authenticated %}  <!--验证是否已登录-->
+
     
-        <ul id="u1">
-            <p id="p1"><a id="x1" href="{{url_for('admin.tj')}}" style="color:black;">添加笔记</a></p>
+            <p id="p1"><a href="{{url_for('admin.logout')}}"> 注销登录</a></p>
+            <p id="p1"><a href="{{url_for('admin.tj')}}" style="color:black;">添加笔记</a></p>
             <!--根据是否为管理员登录来渲染删除按钮-->
             {% if current_user.username=="cc" %}
-            <p id="p1"><a id="x1" href="{{url_for('gly.gly')}}" style="color:black;">网站后台管理</a></p>
-            <p id="p1"><a id="x1" href="#home" style="color:black;">Home</a></p>
-            
+            <p id="p1"><a href="{{url_for('gly.gly')}}" style="color:black;">网站后台管理</a></p>
+            <p id="p1"><a href="#home" style="color:black;">Home</a></p>
+            <p id="p1"><a href="#home" style="color:black;">个人主页</a></p>
             {% endif %}
-            <p id="p1"><a id="x1" href="#home" style="color:black;">个人主页</a></p>   
+               
         </ul>
     
     
-</div>
+
 {% endif %}
+</div>
 
 
 
