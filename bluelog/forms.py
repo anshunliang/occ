@@ -7,7 +7,7 @@ from wtforms.fields import SelectField, SubmitField
 from flask_ckeditor import CKEditorField
 from bluelog.models import Admin,Category,Post
 
-
+from flask_wtf.file import FileField, FileRequired, FileAllowed
 
 #登录表单
 class LoginForm(Form):
@@ -29,7 +29,11 @@ class PostForm(Form):
         super(PostForm, self).__init__(*args, **kwargs)
         self.category.choices = [(category.id, category.name) for category in Category.query.order_by(Category.name).all()]   
 
-
+#添加分类的表单
 class CategoryForm(Form):
     name=StringField('title',validators=[DataRequired()])
 
+#文件上传表单
+class UploadForm(Form):
+    photo = FileField('Upload Image', validators=[FileRequired(), FileAllowed(['jpg','jpeg','png','gif','txt'])])
+    submit = SubmitField()

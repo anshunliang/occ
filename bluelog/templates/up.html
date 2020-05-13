@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+
+
+
+
+<!--风格填充-->
+{% block styles %}
+<style>
+#a
+{
+list-style-type:none;
+margin:0;
+padding:0;
+
+}
+#b
+{
+display:block;
+width: 100px;
+background-color:#dddddd;
+}
+
+</style>
+{% endblock styles %}
+
+
+
+<!--内容填充-->
+<!--内容填充-->
+{% block content %}
+
+
+
+
+
+
+
+
+
+<div id='show' style="width: 900px;height: 600px;;margin: 0 auto;overflow-y:scroll;background-color: azure;padding: 20px;">
+    <!--渲染文件上传按钮-->
+    <div>
+    <form method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        {{form.photo }}<br>
+        {{ form.submit }}<br>
+    </form>
+   </div>
+   <!--渲染所有文件-->
+   {% for i in list %} 
+   <p>{{i}}</p>
+   {% endfor %}
+   <div>
+
+   </div>
+
+</div>
+
+
+     
+
+
+{% endblock %}
+
