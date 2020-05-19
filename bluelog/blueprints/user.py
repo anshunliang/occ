@@ -7,7 +7,7 @@ from bluelog.models import Admin,Category,Post
 from bluelog.forms import CategoryForm,UploadForm   ###导入同级目录中的表单定义文件
 from flask_dropzone import random_filename
 
-import flask_whooshalchemyplus
+import flask_whooshalchemyplus,platform
 
 user_bp=admin_bp = Blueprint('user', __name__)  #定义蓝本
 
@@ -16,12 +16,23 @@ user_bp=admin_bp = Blueprint('user', __name__)  #定义蓝本
 @user_bp.route('/up',methods=['GET', 'POST'])
 def upload():
     form = UploadForm()
+    if(platform.system()=='Windows'):
+        rootdir = "F:\\LCC\\tupian"
+    else:
+        rootdir ="/root/l/tp"
     if form.validate_on_submit():
         f = form.photo.data
         filename =random_filename(f.filename)
-        f.save(os.path.join('F:\\LCC\\tupian',filename))  # 保存文件
+        f.save(os.path.join(rootdir,filename))  # 保存文件
         
-    rootdir = "F:\\LCC\\tupian"
+    
+
+
+
+
+
+
+
     list = os.listdir(rootdir)  # 列出文件夹下所有的目录与文件   
     print(list)
     return render_template('up.html',form = form,list=list)
