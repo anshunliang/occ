@@ -22,7 +22,8 @@ def upload():
         rootdir ="/root/l/tp"
     if form.validate_on_submit():
         f = form.photo.data
-        filename =random_filename(f.filename)
+        #filename =random_filename(f.filename)
+        filename=f.filename
         f.save(os.path.join(rootdir,filename))  # 保存文件
 
     list = os.listdir(rootdir)  # 列出文件夹下所有的目录与文件   
@@ -48,6 +49,17 @@ def download_file():
 
 
 
+#删除服务器上的文件
+@user_bp.route('/delete',methods=['GET','POST'])
+def delete():
+    filename=request.args.get("filename") 
+    
+    if(platform.system()=='Windows'):
+        os.remove("F:\\LCC\\tupian"+"\\"+filename)
+    else:
+        os.remove("/root/l/tp"+"/"+filename)
+    
+    return redirect(url_for('user.upload'))
 
 
 
