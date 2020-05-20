@@ -24,18 +24,29 @@ def upload():
         f = form.photo.data
         filename =random_filename(f.filename)
         f.save(os.path.join(rootdir,filename))  # 保存文件
-        
-    
-
-
-
-
-
-
 
     list = os.listdir(rootdir)  # 列出文件夹下所有的目录与文件   
     print(list)
     return render_template('up.html',form = form,list=list)
+
+
+
+
+#下载文件
+
+@user_bp.route("/download", methods=['GET'])
+def download_file():
+    filename=request.args.get("filename") 
+    
+    if(platform.system()=='Windows'):
+        rootdir = "F:\\LCC\\tupian"
+    else:
+        rootdir ="/root/l/tp"
+
+    return send_from_directory(rootdir, filename, as_attachment=True)
+
+
+
 
 
 
