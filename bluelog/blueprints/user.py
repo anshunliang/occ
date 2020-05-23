@@ -17,12 +17,11 @@ user_bp=admin_bp = Blueprint('user', __name__)  #定义蓝本
 def upload():
     form = UploadForm()
     if(platform.system()=='Windows'):
-        rootdir = "F:\\LCC\\tupian"
+        rootdir = "F:\\LCC\\tupian"                           #开发环境中使用
     else:
-        rootdir ="/root/l/tp"
+        rootdir ="/root/l/occ/bluelog/static/tupian"          #云服务器上使用
     if form.validate_on_submit():
         f = form.photo.data
-        #filename =random_filename(f.filename)
         filename=f.filename
         f.save(os.path.join(rootdir,filename))  # 保存文件
 
@@ -42,7 +41,7 @@ def download_file():
     if(platform.system()=='Windows'):
         rootdir = "F:\\LCC\\tupian"
     else:
-        rootdir ="/root/l/tp"
+        rootdir ="/root/l/occ/bluelog/static/tupian"
 
     return send_from_directory(rootdir, filename, as_attachment=True)
 
@@ -55,14 +54,21 @@ def delete():
     filename=request.args.get("filename") 
     
     if(platform.system()=='Windows'):
-        os.remove("F:\\LCC\\tupian"+"\\"+filename)
+        os.remove("F:\\LCC\\tupian"+"\\"+filename)                     #开发环境中使用
     else:
-        os.remove("/root/l/tp"+"/"+filename)
+        os.remove("/root/l/occ/bluelog/static/tupian"+"/"+filename)    #云服务器上使用
     
     return redirect(url_for('user.upload'))
 
 
 
+@user_bp.route("/<filename>")
+def player(filename):
+    if(platform.system()=='Windows'):
+        path = "..//static//tupian"+"//"+filename           #开发环境中使用
+    else:
+        path = "../static/tupian"+"/"+filename              #云服务器上使用
+    return render_template('player.html',path=path)
 
 
 
