@@ -49,7 +49,10 @@ background-color:#dddddd;
    </div>
    <!--渲染所有文件-->
    {% for i in list %} 
-   <p>{{i}}<a href="{{url_for('user.download_file')}}?filename={{ i }}" >下载</a><a href="{{url_for('user.delete')}}?filename={{ i }}">删除</a></p>
+    <div>{{i}}<a style="padding-right: 2cm;" href="{{url_for('user.download_file')}}?filename={{ i }}" >下载</a>
+              <a style="padding-right: 2cm;" href="{{url_for('user.delete')}}?filename={{ i }}">删除</a>
+              <a style="padding-right: 2cm;" href="{{url_for('user.player')}}?filename={{ i }}">播放</a>
+    </div>
    {% endfor %}
    <div>
 

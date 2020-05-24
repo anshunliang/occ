@@ -12,7 +12,7 @@ import flask_whooshalchemyplus,platform
 user_bp=admin_bp = Blueprint('user', __name__)  #定义蓝本
 
 
-#专门文件上传函数
+#文件上传，并且渲染服务器上的已有文件
 @user_bp.route('/up',methods=['GET', 'POST'])
 def upload():
     form = UploadForm()
@@ -24,9 +24,10 @@ def upload():
         f = form.photo.data
         filename=f.filename
         f.save(os.path.join(rootdir,filename))  # 保存文件
-
+        return redirect(url_for('user.upload'))  #提交文件后，使用重定向，可避免返回上一网页时弹出重复提交表单提示
     list = os.listdir(rootdir)  # 列出文件夹下所有的目录与文件   
     print(list)
+    
     return render_template('up.html',form = form,list=list)
 
 
@@ -61,9 +62,11 @@ def delete():
     return redirect(url_for('user.upload'))
 
 
+#播放视频
 
-@user_bp.route("/<filename>")
-def player(filename):
+@user_bp.route("/player")
+def player():
+    filename=request.args.get("filename")
     if(platform.system()=='Windows'):
         path = "..//static//tupian"+"//"+filename           #开发环境中使用
     else:
