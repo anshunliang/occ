@@ -35,5 +35,5 @@ class CategoryForm(Form):
 
 #文件上传表单
 class UploadForm(Form):
-    photo = FileField('Upload Image', validators=[FileRequired(), FileAllowed(['jpg','jpeg','png','gif','txt','xlsx','zip','mp4','mp3'])])
+    photo = FileField('Upload Image', validators=[FileRequired(), FileAllowed(['jpg','jpeg','png','gif','txt','xlsx','zip','mp4','mp3','pdf'])])
     submit = SubmitField()
