@@ -1,0 +1,9 @@
+阿里云
+将同级目录的default文本拷贝到/etc/nginx/sites-enabled/中，/etc/nginx/sites-enabled中原有的default文件会被替换掉。
+
+然后运行service nginx start,就启动了nginx服务器。
+
+
+再在python虚拟环境下，在/root/l/occ运行uwsgi --ini uwsgi.ini ，那么就启动了uwsgi服务器。
+
+
