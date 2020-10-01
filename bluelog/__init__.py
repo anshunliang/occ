@@ -8,6 +8,7 @@ from bluelog.blueprints.admin import admin_bp
 from bluelog.blueprints.gly import gly_bp
 from bluelog.blueprints.user import user_bp
 from bluelog.extensions import db
+
 from bluelog.models import Admin,Post
 from flask_login import LoginManager
 from flask_dropzone import Dropzone
@@ -22,20 +23,24 @@ from flask_restful import Resource, Api
 
 app = Flask('bluelog')
 
-basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-
+#第一次生成数据库时，需要使用下面3行代码
+##basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+##config_name = os.getenv('FLASK_CONFIG', 'development') 
+##app.config.from_object(config[config_name])    
 
 #实例化类
 dropzone = Dropzone()
 login_manager = LoginManager() #实例化登录类
 ckeditor = CKEditor()
 csrf = CSRFProtect()
+db.init_app(app)
 def create_app(config_name=None):
     #选择配置名
     if config_name is None:
         config_name = os.getenv('FLASK_CONFIG', 'development')   
 
     #app = Flask('bluelog')
+    basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
     app.config.from_object(config[config_name])    
 
     
@@ -55,7 +60,7 @@ def create_app(config_name=None):
     
     
     #初始化扩展
-    db.init_app(app)  
+   # db.init_app(app)  
     csrf.init_app(app)     
     login_manager.init_app(app)   #初始化登录类
     dropzone.init_app(app)
