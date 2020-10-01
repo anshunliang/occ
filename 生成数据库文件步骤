@@ -1,0 +1,6 @@
+首先进入env虚拟环境，然后进入LCC 
+修改bluelog下面的__init__.py代码 
+输入flask shell，回车
+接着 from bluelog import db 
+
+然后db_create_all()
